@@ -2,19 +2,47 @@ import { Card, Group, Badge, ActionIcon, Text } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 
 type FoodProps = {
+  id: string;
   name: string;
   price: number | string;
   quantity: number | string;
   category: string;
-  onDelete: () => void;
 };
 
-export default function ItemCard() {
-  // หากต้องการเปลี่ยนแปลง type ชนิด string เป็น number สามารถใช้วิธีการดังโค้ดตัวอย่างด้านล่างนี้ได้
-  let val_number: number = Number("500.0");
-  console.log(val_number + 100); // 600.0
+interface ItemCardProps {
+  items: FoodProps[];
+  onDelete: (id: string) => void;
+}
 
-  return {
-    /* Type additional text here. */
-  };
+export default function ItemCard({ items, onDelete }: ItemCardProps) {
+  return (
+    <>
+      {items.length > 0 &&
+        items.map(({ id, name, price, quantity, category }) => {
+          return (
+            <Card key={id} shadow="sm" padding="lg" radius="md" withBorder>
+              <Group>
+                <Text>
+                  {name} {price.toLocaleString()} Baht x{" "}
+                  {quantity.toLocaleString()} ={" "}
+                  {(Number(price) * Number(quantity)).toLocaleString()} Baht
+                </Text>
+                <Badge variant="light" color="green">
+                  {category}
+                </Badge>
+                <ActionIcon
+                  variant="light"
+                  color="red"
+                  aria-label="Delete"
+                  size={"sm"}
+                  onClick={() => onDelete(id)}
+                >
+                  <IconTrash />
+                </ActionIcon>
+              </Group>
+            </Card>
+          );
+        })}
+    </>
+  );
 }

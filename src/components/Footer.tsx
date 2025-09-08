@@ -1,9 +1,22 @@
 import { Text, Group } from "@mantine/core";
-export default function Footer(/* add props here */) {
+
+interface FooterProps {
+  studentName: string;
+  studentId: number;
+  subject: string;
+  year: number;
+}
+
+export default function Footer({
+  studentName,
+  studentId,
+  subject,
+  year,
+}: FooterProps) {
   return (
     <Group p="md" justify="center">
       <Text>
-        © Chanadda 670612999 CPE207-2025. All rights reserved.
+        © {studentName} {studentId} {subject}-{year}. All rights reserved.
       </Text>
     </Group>
   );
