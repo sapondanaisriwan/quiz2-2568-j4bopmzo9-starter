@@ -72,16 +72,18 @@ export default function AddFoodModal({
         value={price}
         onChange={setPrice}
         mt="md"
+        allowDecimal={false}
       />
       <NumberInput
         label="Quantity"
         withAsterisk
         description="Quantity"
-        error={(price === "" || Number(price) <= 0) && "Quantity is required"}
+        error={(quantity === "" || Number(quantity) <= 0) && "Quantity is required"}
         min={0}
         value={quantity}
         onChange={setQuantity}
         mt="md"
+        allowDecimal={false}
       />
       <Select
         label="Category"
